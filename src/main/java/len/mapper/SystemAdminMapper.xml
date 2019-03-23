@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="len.mapper.SystemAdminMapper">
+
+    <!-- 开启二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="len.entity.SystemAdmin">
+        <id column="id" property="id" />
+        <result column="personnel_id" property="personnelId" />
+        <result column="company_id" property="companyId" />
+        <result column="username" property="username" />
+        <result column="email" property="email" />
+        <result column="password" property="password" />
+        <result column="uuid" property="uuid" />
+        <result column="name" property="name" />
+        <result column="nickname" property="nickname" />
+        <result column="is_hr" property="isHr" />
+        <result column="is_super" property="isSuper" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, personnel_id, company_id, username, email, password, uuid, name, nickname, is_hr, is_super, gmt_create, gmt_modified
+    </sql>
+
+</mapper>
