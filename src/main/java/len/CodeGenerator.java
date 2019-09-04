@@ -16,10 +16,12 @@ public class CodeGenerator {
         GlobalConfig config = new GlobalConfig();
         config.setActiveRecord(false) // 是否支持AR模式
                 .setAuthor("len") // 作者
+                .setEnableCache(false)//不在xml中添加二级缓存
                 .setOutputDir(".\\src\\main\\java") // 生成路径
                 .setFileOverride(true)  // 文件覆盖
-                .setIdType(IdType.AUTO) // 主键策略
-                .setServiceName("I%sService")  // 设置生成的service接口的名字的首字母是否为I
+                .setIdType(IdType.INPUT) // 主键策略
+                .setServiceName("%sService")  // 设置生成的service接口的名字的首字母是否为I
+                .setServiceImplName("%sServiceImpl")
                 // IUserService
                 .setBaseResultMap(true)
                 .setBaseColumnList(true);
@@ -28,28 +30,29 @@ public class CodeGenerator {
         DataSourceConfig dsConfig = new DataSourceConfig();
         dsConfig.setDbType(DbType.MYSQL)  // 设置数据库类型
                 .setDriverName("com.mysql.jdbc.Driver")
-                .setUrl("jdbc:mysql://localhost:3306/micro-course-manager-test?useSSL=true&verifyServerCertificate=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8")
+                .setUrl("jdbc:mysql://localhost:3306/recruit?useSSL=true&verifyServerCertificate=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8")
                 .setUsername("root")
                 .setPassword("lqq74561");
 
         //3. 策略配置
 
         //配置要生成的表的表名
-        String[] tableName = {"system_power_type","system_admin","company","power_api","power_action","power_action_api","power_action_group","power_admin_group","power_group"};
+        String[] tableName = {"video","video_play_log","wx_member","source"};
         StrategyConfig stConfig = new StrategyConfig();
         stConfig.setCapitalMode(true) //全局大写命名
                 .setDbColumnUnderline(true)  // 指定表名 字段名是否使用下划线
                 .setNaming(NamingStrategy.underline_to_camel) // 数据库表映射到实体的命名策略
                 .setTablePrefix("tb_")
                 .setInclude(tableName);  // 生成的表
+                //.setExclude(tableName); //不要生成的表
 
         //4. 包名策略配置
         PackageConfig pkConfig = new PackageConfig();
-        pkConfig.setParent("len")
+        pkConfig.setParent("com.hyqfx.recruit")
                 .setMapper("mapper")
                 .setService("service")
-                .setController("controller")
-                .setEntity("entity")
+//                .setController("controller")
+                .setEntity("model")
                 .setXml("mapper");
 
         //5. 整合配置
